@@ -5,7 +5,7 @@ import base64
 import io
 
 app = Dash(__name__)
-
+# app. layout - это компонент для создания общих макетов приложений
 app.layout = html.Div([
     dcc.Upload(
         id='upload-data',
@@ -62,9 +62,13 @@ def update_data_and_graph(contents, filename, col_chosen):
         content_type, content_string = contents.split(',')
         decoded = base64.b64decode(content_string)
         df = pd.read_csv(io.StringIO(decoded.decode('utf-8')))
-
+# В статистике гистограмма - это представление распределения числовых данных, 
+# где данные распределены по ячейкам и представлено количество для каждой ячейки.
         fig_hist = px.histogram(df, x='Дата', y=col_chosen, histfunc='avg')
+        # Круговая диаграмма - это круговая статистическая диаграмма,
+# которая разделена на сектора для иллюстрации числовой пропорции.
         fig_pie = px.pie(df, values='Пациент',  names='Пациент')
+        # С помощью px.bar, каждая строка фрейма данных представляется в виде прямоугольной метки.
         fig_bar = px.bar(df, x='Дата', y='Пациент')
 
         return df.to_dict('records'), fig_pie, fig_hist, fig_bar
