@@ -39,6 +39,7 @@ app.layout = html.Div([
     dcc.RadioItems(options=[
         {'label': 'Возраст', 'value': 'Возраст'},
         {'label': 'Давление', 'value': 'Давление'}
+        # Label представляет текстовую метку. Этот элемент позволяет выводить статический текст без возможности редактирования.
     ], value='Возраст', id='controls-and-radio-item'),
     dash_table.DataTable(data=[], page_size=10, id='data-table'),
     dcc.Graph(figure={}, id='controls-and-graph'),
